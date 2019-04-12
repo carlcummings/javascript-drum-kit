@@ -60,7 +60,37 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
   <script>
-    //  Your code goes here
+    let button;
+    let audio;
+
+    function onKeyDown(e) {
+      // find out what key was pressed
+      console.log(event.keyCode);
+      // find element with matching data-key attribute - use queryselector
+      button = document.querySelector(`div[data-key='${e.keyCode}']`);
+      // find the audio that relates to the key code
+      audio = document.querySelector(`audio[data-key='${e.keyCode}']`);
+      // add style to the div we are pushing
+      if(button) {
+        button.classList.add('playing');
+        audio.play()
+      }
+      // play the audio
+      console.log("I have pushed a button", button, audio)
+      
+    }
+    function onKeyUp() {
+      // remove the class from the div
+      if (button) {
+        button.classList.remove('playing');
+         // stop the sound
+        audio.currentTime = 0;
+        audio.pause();
+      }
+      console.log(button)
+    }
+    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('keyup', onKeyUp)
   </script>
 
 
